@@ -1,0 +1,26 @@
+[project]
+name = "finanzas-mcp"
+version = "0.1.0"
+description = "Servidor MCP de calculadoras financieras genéricas: ratios, valoración (WACC/DCF/VAN-TIR), diagnóstico (DuPont, Z-Score, F-Score), operación y tributario Chile. Cálculo puro, sin conexiones externas."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Luis Cáceres" }]
+keywords = ["mcp", "finanzas", "finance", "ratios", "wacc", "dcf", "chile", "claude"]
+dependencies = ["mcp>=1.2.0"]
+
+[project.scripts]
+finanzas-mcp = "finanzas_mcp.server:main"
+
+[project.urls]
+Repository = "https://github.com/luiscaceres/finanzas-mcp"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/finanzas_mcp"]
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
