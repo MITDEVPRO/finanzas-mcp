@@ -13,7 +13,7 @@ dependencies = ["mcp>=1.2.0"]
 finanzas-mcp = "finanzas_mcp.server:main"
 
 [project.urls]
-Repository = "https://github.com/luiscaceres/finanzas-mcp"
+Repository = "https://github.com/MITDEVPRO/finanzas-mcp"
 
 [build-system]
 requires = ["hatchling"]

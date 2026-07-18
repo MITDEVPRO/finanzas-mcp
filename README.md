@@ -26,7 +26,7 @@ Convenciones: **tasas en decimales** (`0.10` = 10 %), montos en la moneda que us
   "mcpServers": {
     "finanzas": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/luiscaceres/finanzas-mcp", "finanzas-mcp"]
+      "args": ["--from", "git+https://github.com/MITDEVPRO/finanzas-mcp", "finanzas-mcp"]
     }
   }
 }
@@ -35,13 +35,13 @@ Convenciones: **tasas en decimales** (`0.10` = 10 %), montos en la moneda que us
 En Claude Code basta:
 
 ```bash
-claude mcp add finanzas -- uvx --from git+https://github.com/luiscaceres/finanzas-mcp finanzas-mcp
+claude mcp add finanzas -- uvx --from git+https://github.com/MITDEVPRO/finanzas-mcp finanzas-mcp
 ```
 
 ### Desde el código clonado
 
 ```bash
-git clone https://github.com/luiscaceres/finanzas-mcp
+git clone https://github.com/MITDEVPRO/finanzas-mcp
 cd finanzas-mcp
 uv run finanzas-mcp        # o: pip install -e . && finanzas-mcp
 ```
