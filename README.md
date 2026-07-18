@@ -1,5 +1,7 @@
 # finanzas-mcp
 
+[![CI](https://github.com/MITDEVPRO/finanzas-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/MITDEVPRO/finanzas-mcp/actions/workflows/ci.yml)
+
 Servidor **MCP** (Model Context Protocol) de **calculadoras financieras genéricas**, en español, para usar con Claude Desktop, Claude Code o cualquier cliente MCP.
 
 **25 herramientas de cálculo puro**: todas operan sobre los datos que tú entregas — el servidor **no se conecta a internet, a bases de datos ni guarda estado**. Sirve para cualquier empresa, en cualquier moneda.
