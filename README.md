@@ -73,3 +73,7 @@ Los resultados son **referenciales y educativos**: no constituyen asesoría fina
 ## Licencia
 
 [MIT](LICENSE)
+
+---
+
+`mcp-name: io.github.mitdevpro/finanzas-mcp`
