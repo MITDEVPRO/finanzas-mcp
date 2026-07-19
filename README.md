@@ -76,4 +76,4 @@ Los resultados son **referenciales y educativos**: no constituyen asesoría fina
 
 ---
 
-`mcp-name: io.github.mitdevpro/finanzas-mcp`
+`mcp-name: io.github.MITDEVPRO/finanzas-mcp`

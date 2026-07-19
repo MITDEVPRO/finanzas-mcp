@@ -1,6 +1,6 @@
 [project]
 name = "finanzas-mcp"
-version = "0.1.1"
+version = "0.1.2"
 description = "Servidor MCP de calculadoras financieras genéricas: ratios, valoración (WACC/DCF/VAN-TIR), diagnóstico (DuPont, Z-Score, F-Score), operación y tributario Chile. Cálculo puro, sin conexiones externas."
 readme = "README.md"
 requires-python = ">=3.10"

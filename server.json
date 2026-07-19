@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "io.github.MITDEVPRO/finanzas-mcp",
+  "description": "25 calculadoras financieras en español: ratios, WACC, DCF, VAN/TIR, DuPont y tributario Chile",
+  "repository": {
+    "url": "https://github.com/MITDEVPRO/finanzas-mcp",
+    "source": "github"
+  },
+  "version": "0.1.2",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "finanzas-mcp",
+      "version": "0.1.2",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
