@@ -8,6 +8,8 @@ Servidor **MCP** (Model Context Protocol) de **calculadoras financieras genéric
 
 > *Finance calculators as an MCP server (Spanish-first): ratios, DuPont, Altman Z-Score, Piotroski F-Score, WACC, CAPM, DCF, multiples, NPV/IRR, break-even, AR aging, depreciation, loan amortization, indirect cash flow, and Chilean tax helpers (VAT, corporate tax, monetary correction). Pure computation, no external connections.*
 
+![Demo: Claude calculando un WACC con finanzas-mcp](docs/demo.png)
+
 ## Herramientas
 
 | Módulo | Tools |
