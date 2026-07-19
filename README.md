@@ -1,6 +1,6 @@
 # finanzas-mcp
 
-[![CI](https://github.com/MITDEVPRO/finanzas-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/MITDEVPRO/finanzas-mcp/actions/workflows/ci.yml)
+[![CI](https://github.com/MITDEVPRO/finanzas-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/MITDEVPRO/finanzas-mcp/actions/workflows/ci.yml) [![PyPI](https://img.shields.io/pypi/v/finanzas-mcp)](https://pypi.org/project/finanzas-mcp/)
 
 Servidor **MCP** (Model Context Protocol) de **calculadoras financieras genéricas**, en español, para usar con Claude Desktop, Claude Code o cualquier cliente MCP.
 
@@ -30,7 +30,7 @@ Convenciones: **tasas en decimales** (`0.10` = 10 %), montos en la moneda que us
   "mcpServers": {
     "finanzas": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/MITDEVPRO/finanzas-mcp", "finanzas-mcp"]
+      "args": ["finanzas-mcp"]
     }
   }
 }
@@ -39,7 +39,7 @@ Convenciones: **tasas en decimales** (`0.10` = 10 %), montos en la moneda que us
 En Claude Code basta:
 
 ```bash
-claude mcp add finanzas -- uvx --from git+https://github.com/MITDEVPRO/finanzas-mcp finanzas-mcp
+claude mcp add finanzas -- uvx finanzas-mcp
 ```
 
 ### Desde el código clonado
