@@ -7,6 +7,17 @@ requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "Luis Cáceres" }]
 keywords = ["mcp", "finanzas", "finance", "ratios", "wacc", "dcf", "chile", "claude"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: Spanish",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial",
+]
 dependencies = ["mcp>=1.2.0"]
 
 [project.scripts]
@@ -14,6 +25,7 @@ finanzas-mcp = "finanzas_mcp.server:main"
 
 [project.urls]
 Repository = "https://github.com/MITDEVPRO/finanzas-mcp"
+Issues = "https://github.com/MITDEVPRO/finanzas-mcp/issues"
 
 [build-system]
 requires = ["hatchling"]
