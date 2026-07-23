@@ -103,7 +103,7 @@ def ratios_endeudamiento(
             round(safe_div(deuda_financiera, ebitda), 2) if ebitda else None
         ),
         "cobertura_intereses_veces": (
-            round(safe_div(ebit, gastos_financieros), 2) if gastos_financieros else None
+            round(safe_div(ebit, gastos_financieros), 2) if gastos_financieros and ebit else None
         ),
         "interpretacion": (
             "Referencias usuales: deuda/EBITDA > 3-4x exige plan de desapalancamiento; "

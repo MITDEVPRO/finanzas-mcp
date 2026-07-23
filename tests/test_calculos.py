@@ -153,3 +153,90 @@ def test_servidor_registra_todas_las_tools():
     tools = asyncio.run(mcp.list_tools())
     assert len(tools) == 25
     assert all(t.annotations.readOnlyHint for t in tools)
+
+
+# --- Cobertura de las tools que faltaban ---
+
+def test_ratios_rentabilidad():
+    r = fn(ratios.ratios_rentabilidad)(
+        ventas=1000, utilidad_bruta=400, utilidad_operacional=200, utilidad_neta=100,
+        activos_totales=2000, patrimonio=800,
+    )
+    assert r["margen_bruto_pct"] == 40.0
+    assert r["margen_operacional_pct"] == 20.0
+    assert r["margen_neto_pct"] == 10.0
+    assert r["roa_pct"] == 5.0
+    assert r["roe_pct"] == 12.5
+
+
+def test_ratios_eficiencia_ccc():
+    r = fn(ratios.ratios_eficiencia)(
+        ventas=3650, costo_ventas=1825, inventario_promedio=500, cxc_promedio=300,
+        cxp_promedio=250, dias_periodo=365,
+    )
+    assert r["dio_dias_inventario"] == 100.0
+    assert r["dso_dias_cobro"] == 30.0
+    assert r["dpo_dias_pago"] == 50.0
+    assert r["ccc_ciclo_conversion_caja"] == 80.0   # DIO + DSO - DPO
+
+
+def test_ratios_endeudamiento():
+    r = fn(ratios.ratios_endeudamiento)(
+        pasivos_totales=1200, patrimonio=800, activos_totales=2000,
+        ebitda=300, deuda_financiera=900, gastos_financieros=60, ebit=240,
+    )
+    assert r["leverage_pasivos_sobre_patrimonio"] == 1.5
+    assert r["endeudamiento_sobre_activos_pct"] == 60.0
+    assert r["deuda_financiera_sobre_ebitda"] == 3.0
+    assert r["cobertura_intereses_veces"] == 4.0
+
+
+def test_endeudamiento_sin_ebit_no_reporta_cobertura_cero():
+    r = fn(ratios.ratios_endeudamiento)(
+        pasivos_totales=1200, patrimonio=800, activos_totales=2000, gastos_financieros=60,
+    )
+    assert r["cobertura_intereses_veces"] is None   # sin EBIT no hay cobertura, no "0.0x"
+
+
+def test_working_capital_nof():
+    r = fn(ratios.working_capital)(cxc=300, inventario=500, cxp=250, ventas_anuales=3650)
+    assert r["nof_necesidad_operativa"] == 550
+    assert r["nof_sobre_ventas_pct"] == 15.07
+
+
+def test_capm_directo():
+    r = fn(val.capm_costo_equity)(
+        tasa_libre_riesgo=0.045, beta=1.2, premio_riesgo_mercado=0.05, riesgo_pais=0.01,
+    )
+    assert r["ke_costo_equity_pct"] == 11.5   # 4.5 + 1.2×5 + 1
+
+
+def test_valoracion_multiplos_ev_ebitda():
+    r = fn(val.valoracion_multiplos)(ebitda=100, multiplo_ev_ebitda=8)
+    assert r["valor_equity_por_metodo"]["por_ev_ebitda"] == 800
+    assert r["rango"] == {"min": 800, "max": 800}
+
+
+def test_variacion_simple_y_cagr():
+    r = fn(ops.variacion)(valor_actual=150, valor_anterior=100)
+    assert r["variacion_absoluta"] == 50
+    assert r["variacion_pct"] == 50.0
+    r5 = fn(ops.variacion)(valor_actual=200, valor_anterior=100, periodos=5)
+    assert r5["cagr_pct"] == 14.87   # 2^(1/5) - 1
+
+
+def test_interes_compuesto_vf():
+    r = fn(ops.interes_compuesto)(capital=1000, tasa_periodo=0.05, periodos=10)
+    assert r["valor_futuro"] == 1628.89
+    assert r["interes_ganado"] == 628.89
+
+
+def test_escudo_fiscal():
+    r = fn(trib.escudo_fiscal)(gasto_deducible=1000, tasa_impuesto=0.27)
+    assert r["ahorro_impuesto"] == 270.0
+    assert r["costo_neto_del_gasto"] == 730.0
+
+
+def test_ppm():
+    r = fn(trib.ppm_calculo)(ingresos_brutos_mes=10000, tasa_ppm=0.005)
+    assert r["ppm_del_mes"] == 50.0
