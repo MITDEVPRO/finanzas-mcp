@@ -58,6 +58,10 @@ uv run finanzas-mcp        # o: pip install -e . && finanzas-mcp
 - *"Tabla de un crédito de 50M a 60 cuotas, 1,1% mensual, sistema francés"*
 - *"Aging de estas facturas: [{monto: 12M, dias_vencido: 45, cliente: 'ACME'}, …]"*
 
+## ¿Te sirvió?
+
+Si finanzas-mcp te ahorró un cálculo (o una discusión de comité), la mejor forma de apoyarlo es una **⭐ en este repo** — es lo que hace que más gente lo encuentre. Y si te falta una calculadora, [abre un issue](https://github.com/MITDEVPRO/finanzas-mcp/issues): las nuevas tools salen de ahí.
+
 ## Desarrollo
 
 ```bash
