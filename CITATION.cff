@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use finanzas-mcp in your research or thesis, please cite it as below."
+title: "finanzas-mcp: financial calculators as an MCP server (Spanish-first)"
+type: software
+authors:
+  - family-names: "Cáceres Cubillos"
+    given-names: "Luis"
+    orcid: ""
+repository-code: "https://github.com/MITDEVPRO/finanzas-mcp"
+url: "https://luiscaceres.cl"
+license: MIT
+version: 0.1.3
+date-released: "2026-07-23"
+keywords:
+  - finance
+  - mcp
+  - model-context-protocol
+  - valuation
+  - wacc
+  - dcf
+  - spanish

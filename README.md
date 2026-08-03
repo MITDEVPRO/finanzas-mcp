@@ -62,6 +62,22 @@ uv run finanzas-mcp        # o: pip install -e . && finanzas-mcp
 
 Si finanzas-mcp te ahorró un cálculo (o una discusión de comité), la mejor forma de apoyarlo es una **⭐ en este repo** — es lo que hace que más gente lo encuentre. Y si te falta una calculadora, [abre un issue](https://github.com/MITDEVPRO/finanzas-mcp/issues): las nuevas tools salen de ahí.
 
+## English
+
+**finanzas-mcp** is an MCP (Model Context Protocol) server with **25 pure-computation finance calculators**, Spanish-first with self-describing schemas. It runs locally over stdio: **no internet, no databases, no state** — it only computes on the numbers you provide, so it works for any company and any currency.
+
+**Tools**: liquidity/profitability/efficiency/leverage ratios · DuPont (3 & 5 factor) · Altman Z-Score (3 variants) · Piotroski F-Score · working capital · CAPM (with Hamada beta) · WACC · DCF with sensitivity · valuation multiples · NPV/IRR/payback · break-even · AR aging · depreciation · loan amortization (French/German) · compound interest · indirect cash flow · Chilean tax helpers (VAT, corporate tax, monetary correction, tax shield — all parameterizable).
+
+**Install** (Claude Desktop / Claude Code, requires [uv](https://docs.astral.sh/uv/)):
+
+```bash
+claude mcp add finanzas -- uvx finanzas-mcp
+```
+
+**Try prompts like**: *"Compute WACC: equity 60%, cost of equity 12%, cost of debt 6%, tax rate 27%"* or *"DCF this: FCF 1200, 1350, 1500; WACC 11%; g 2.5%; net debt 2000"*. Tool descriptions are in Spanish, but Claude bridges languages transparently — ask in English and it just works.
+
+If it saves you a calculation, a **⭐ star** helps others find it. Missing a calculator? [Open an issue](https://github.com/MITDEVPRO/finanzas-mcp/issues).
+
 ## Desarrollo
 
 ```bash
