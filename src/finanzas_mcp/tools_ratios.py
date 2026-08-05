@@ -86,6 +86,63 @@ def ratios_eficiencia(
 
 
 @mcp.tool(annotations=READ_ONLY)
+def ciclo_caja(
+    ventas: Annotated[float, Field(description="Ventas del período (a precio de venta)", gt=0)],
+    costo_ventas: Annotated[float, Field(description="Costo de ventas del período", gt=0)],
+    inventario_promedio: Annotated[float, Field(description="Inventario promedio del período", ge=0)],
+    cxc_promedio: Annotated[float, Field(description="Cuentas por cobrar promedio", ge=0)],
+    cxp_promedio: Annotated[float, Field(description="Cuentas por pagar promedio", ge=0)],
+    dias_periodo: Annotated[int, Field(description="Días del período analizado", ge=1, le=366)] = 365,
+    moneda: Annotated[str, Field(description="Etiqueta de moneda para los montos (ej: 'CLP', 'USD'); solo informativa")] = "",
+) -> dict:
+    """Ciclo de conversión de caja VALORIZADO: DIO/DSO/DPO en días y cuánta plata vale cada día de cada componente.
+
+    Complementa a ratios_eficiencia: además de los días, entrega el valor de día unitario
+    (1 día de inventario o de pago vale costo_ventas/días; 1 día de cobro vale ventas/días),
+    la caja atrapada en el ciclo (NOF) y el efecto en caja de mover cada palanca en 1 día.
+    Para grupos multipaís: correr por entidad EN SU MONEDA y consolidar los DÍAS ponderando
+    por ventas — los montos no se suman entre monedas sin convertir.
+    """
+    dio = inventario_promedio * dias_periodo / costo_ventas
+    dso = cxc_promedio * dias_periodo / ventas
+    dpo = cxp_promedio * dias_periodo / costo_ventas
+    ccc = dio + dso - dpo
+    venta_diaria = ventas / dias_periodo
+    costo_diario = costo_ventas / dias_periodo
+    nof = inventario_promedio + cxc_promedio - cxp_promedio
+    et = f" {moneda}" if moneda else ""
+    return {
+        "dias": {
+            "dio_inventario": round(dio, 1),
+            "dso_cobro": round(dso, 1),
+            "dpo_pago": round(dpo, 1),
+            "ccc_ciclo_caja": round(ccc, 1),
+        },
+        "valor_dia_unitario": {
+            "dia_de_inventario": round(costo_diario, 2),
+            "dia_de_cobro": round(venta_diaria, 2),
+            "dia_de_pago": round(costo_diario, 2),
+            "nota": "1 día de inventario o de pago se valoriza a costo; 1 día de cobro, a venta.",
+        },
+        "caja_atrapada_en_el_ciclo": round(nof, 2),
+        "efecto_de_mover_1_dia": {
+            "bajar_1_dia_inventario_libera": round(costo_diario, 2),
+            "cobrar_1_dia_antes_libera": round(venta_diaria, 2),
+            "pagar_1_dia_despues_libera": round(costo_diario, 2),
+        },
+        "interpretacion": (
+            f"El ciclo es de {round(ccc, 1)} días y mantiene {round(nof, 2)}{et} atrapados en la operación. "
+            f"Decir 'cada día de cobro cuesta {round(venta_diaria, 2)}{et}' mueve más decisiones "
+            "que reportar los días a secas."
+        ),
+        "nota_multipais": (
+            "Consolidación multipaís: calcule por entidad en su moneda y pondere los DÍAS por ventas; "
+            "convierta a una moneda común solo si necesita sumar los montos."
+        ),
+    }
+
+
+@mcp.tool(annotations=READ_ONLY)
 def ratios_endeudamiento(
     pasivos_totales: Annotated[float, Field(description="Pasivos totales (deuda + otros)")],
     patrimonio: Annotated[float, Field(description="Patrimonio total")],

@@ -151,7 +151,7 @@ def test_servidor_registra_todas_las_tools():
     from finanzas_mcp.app import mcp
 
     tools = asyncio.run(mcp.list_tools())
-    assert len(tools) == 25
+    assert len(tools) == 26
     assert all(t.annotations.readOnlyHint for t in tools)
 
 
@@ -240,3 +240,27 @@ def test_escudo_fiscal():
 def test_ppm():
     r = fn(trib.ppm_calculo)(ingresos_brutos_mes=10000, tasa_ppm=0.005)
     assert r["ppm_del_mes"] == 50.0
+
+
+def test_ciclo_caja_valorizado():
+    # Ventas 3.650, costo 2.920, días 365 -> venta diaria 10, costo diario 8
+    r = fn(ratios.ciclo_caja)(
+        ventas=3650, costo_ventas=2920,
+        inventario_promedio=800, cxc_promedio=500, cxp_promedio=400,
+    )
+    assert r["dias"]["dio_inventario"] == 100.0   # 800/8
+    assert r["dias"]["dso_cobro"] == 50.0         # 500/10
+    assert r["dias"]["dpo_pago"] == 50.0          # 400/8
+    assert r["dias"]["ccc_ciclo_caja"] == 100.0
+    assert r["valor_dia_unitario"]["dia_de_inventario"] == 8.0
+    assert r["valor_dia_unitario"]["dia_de_cobro"] == 10.0
+    assert r["caja_atrapada_en_el_ciclo"] == 900
+    assert r["efecto_de_mover_1_dia"]["cobrar_1_dia_antes_libera"] == 10.0
+
+
+def test_ciclo_caja_consistencia_con_ratios_eficiencia():
+    kw = dict(ventas=1000, costo_ventas=700, inventario_promedio=200,
+              cxc_promedio=150, cxp_promedio=100)
+    a = fn(ratios.ciclo_caja)(**kw)
+    b = fn(ratios.ratios_eficiencia)(**kw)
+    assert a["dias"]["ccc_ciclo_caja"] == b["ccc_ciclo_conversion_caja"]

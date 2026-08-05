@@ -6,7 +6,7 @@ Servidor **MCP** (Model Context Protocol) de **calculadoras financieras genéric
 
 **25 herramientas de cálculo puro**: todas operan sobre los datos que tú entregas — el servidor **no se conecta a internet, a bases de datos ni guarda estado**. Sirve para cualquier empresa, en cualquier moneda.
 
-> *Finance calculators as an MCP server (Spanish-first): ratios, DuPont, Altman Z-Score, Piotroski F-Score, WACC, CAPM, DCF, multiples, NPV/IRR, break-even, AR aging, depreciation, loan amortization, indirect cash flow, and Chilean tax helpers (VAT, corporate tax, monetary correction). Pure computation, no external connections.*
+> *Finance calculators as an MCP server (Spanish-first): ratios, DuPont, Altman Z-Score, Piotroski F-Score, WACC, CAPM, DCF, multiples, NPV/IRR, break-even, valued cash conversion cycle ($ per day, multi-country), AR aging, depreciation, loan amortization, indirect cash flow, and Chilean tax helpers (VAT, corporate tax, monetary correction). Pure computation, no external connections.*
 
 ![Demo: Claude calculando un WACC con finanzas-mcp](docs/demo.png)
 
@@ -14,7 +14,7 @@ Servidor **MCP** (Model Context Protocol) de **calculadoras financieras genéric
 
 | Módulo | Tools |
 |---|---|
-| **Ratios y diagnóstico** | `ratios_liquidez` · `ratios_rentabilidad` · `ratios_eficiencia` (DIO/DSO/DPO/CCC) · `ratios_endeudamiento` · `dupont` (3 y 5 factores) · `altman_z_score` (3 variantes) · `piotroski_f_score` · `working_capital` (NOF) |
+| **Ratios y diagnóstico** | `ratios_liquidez` · `ratios_rentabilidad` · `ratios_eficiencia` (DIO/DSO/DPO/CCC) · `ciclo_caja` (CCC valorizado: $ por día + multipaís) · `ratios_endeudamiento` · `dupont` (3 y 5 factores) · `altman_z_score` (3 variantes) · `piotroski_f_score` · `working_capital` (NOF) |
 | **Valoración** | `capm_costo_equity` (con beta Hamada) · `wacc` · `dcf` (con sensibilidad WACC×g) · `valoracion_multiplos` · `van_tir` (VAN, TIR, payback) |
 | **Operación** | `punto_equilibrio` · `variacion` (Δ, %, CAGR) · `aging_cartera` · `depreciacion` (lineal/acelerada/suma dígitos) · `amortizacion_credito` (francés/alemán) · `interes_compuesto` · `flujo_caja_indirecto` |
 | **Tributario (Chile, parametrizable)** | `iva` · `impuesto_empresa` (14A/14D3/custom) · `correccion_monetaria` · `escudo_fiscal` · `ppm_calculo` |
@@ -68,7 +68,7 @@ Si finanzas-mcp te ahorró un cálculo (o una discusión de comité), la mejor f
 
 **finanzas-mcp** is an MCP (Model Context Protocol) server with **25 pure-computation finance calculators**, Spanish-first with self-describing schemas. It runs locally over stdio: **no internet, no databases, no state** — it only computes on the numbers you provide, so it works for any company and any currency.
 
-**Tools**: liquidity/profitability/efficiency/leverage ratios · DuPont (3 & 5 factor) · Altman Z-Score (3 variants) · Piotroski F-Score · working capital · CAPM (with Hamada beta) · WACC · DCF with sensitivity · valuation multiples · NPV/IRR/payback · break-even · AR aging · depreciation · loan amortization (French/German) · compound interest · indirect cash flow · Chilean tax helpers (VAT, corporate tax, monetary correction, tax shield — all parameterizable).
+**Tools**: liquidity/profitability/efficiency/leverage ratios · DuPont (3 & 5 factor) · Altman Z-Score (3 variants) · Piotroski F-Score · working capital · CAPM (with Hamada beta) · WACC · DCF with sensitivity · valuation multiples · NPV/IRR/payback · break-even · valued cash conversion cycle ($/day per lever, multi-country) · AR aging · depreciation · loan amortization (French/German) · compound interest · indirect cash flow · Chilean tax helpers (VAT, corporate tax, monetary correction, tax shield — all parameterizable).
 
 **Install** (Claude Desktop / Claude Code, requires [uv](https://docs.astral.sh/uv/)):
 
